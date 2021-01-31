@@ -1,12 +1,5 @@
 import httpx
 
-from nonebot import get_driver
-from .config import Config
-global_config = get_driver().config
-config = Config(**global_config.dict())
-
-
-
 class dataApi():
     '''
     从网易云音乐接口直接获取数据（实验性）
@@ -67,7 +60,7 @@ class dataApi():
 
 class dataGet(dataApi):
     '''
-    从NeteaseCloudMusicApi获取数据，并做简单处理
+    从dataApi获取数据，并做简单处理
     '''
 
     api=dataApi()
@@ -79,7 +72,7 @@ class dataGet(dataApi):
         songIds = list()
         r = await self.api.search(songName=songName)
         if r is None:
-            return None
+            raise WrongDataError
         idRange = amount if amount < len(
             r["result"]["songs"]) else len(r["result"]["songs"])
         for i in range(idRange):
@@ -92,6 +85,8 @@ class dataGet(dataApi):
         '''
         songComments = dict()
         r = await self.api.getHotComments(songId)
+        if r is None:
+            raise WrongDataError
         commentsRange = amount if amount < len(
             r['hotComments']) else len(r['hotComments'])
         for i in range(commentsRange):
@@ -105,7 +100,8 @@ class dataGet(dataApi):
         '''
         songInfo = dict()
         r = await self.api.getSongInfo(songId)
-        
+        if r is None:
+            raise WrongDataError
         songInfo["songName"] = r["songs"][0]["name"]
 
         songArtists = list()
@@ -149,3 +145,14 @@ class dataProcess():
             ['%s： %s' % (key, value) for (key, value) in songComments.items()])
         return songCommentsMessage
 
+class Error(Exception):
+    '''
+    谁知道网易的接口会出什么幺蛾子
+    '''
+    pass
+
+class WrongDataError(Error):
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
+        self.message += "\n未从网易接口获取到有效的数据！"

@@ -5,10 +5,6 @@ from nonebot.adapters import Bot, Event
 from nonebot.typing import T_State
 from nonebot import on_command
 
-from nonebot import get_driver
-from .config import Config
-global_config = get_driver().config
-config = Config(**global_config.dict())
 
 dataget = dataGet()
 
@@ -19,7 +15,10 @@ songpicker = on_command(
 @songpicker.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()
-    if args:
+    if args.isdigit():
+        if "songName" in state:
+            state["songNum"] = int(args)
+    elif args:
         state["songName"] = args
 
 
@@ -38,14 +37,22 @@ async def handle_songName(bot: Bot, event: Event, state: T_State):
     state["songIdList"] = songIdList
 
 
-@songpicker.receive()
+@songpicker.got("songNum")
 async def handle_songNum(bot: Bot, event: Event, state: T_State):
     songIdList = state["songIdList"]
-    songNum = str(event.get_message()).strip()
+    songNum = state["songNum"]
+
+    # 处理重选
     if not songNum.isdigit():
         await songpicker.finish()
-    selectedSongId = songIdList[int(songNum)]
+    else:
+        songNum=int(songNum)
     
+    if songNum >= len(songIdList):
+        await songpicker.reject("数字序号错误，请重选")
+
+    selectedSongId = songIdList[int(songNum)]
+
     songContent = [
         {
             "type": "music",
@@ -71,7 +78,16 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State):
             "data": {
                 "text": songCommentsMessage
             }
+        },
+        {
+            "type": "text",
+            "data": {
+                "text": "\n【回复序号可重选】"
+            }
         }
     ]
-    
-    await songpicker.finish(commentContent)
+
+    await songpicker.send(commentContent)
+
+    # 重选功能
+    await songpicker.reject()
