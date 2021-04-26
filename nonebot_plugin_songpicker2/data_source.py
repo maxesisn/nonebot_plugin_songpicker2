@@ -20,7 +20,7 @@ class dataApi():
                 cookies=self.cookies
             )
         if r.status_code != 200:
-            return None
+            raise WrongDataError
         r = r.json()
         return r
 
@@ -39,7 +39,7 @@ class dataApi():
                 cookies=self.cookies
             )
         if r.status_code != 200:
-            return None
+            raise WrongDataError
         r = r.json()
         return r
 
@@ -71,8 +71,9 @@ class dataGet(dataApi):
         '''
         songIds = list()
         r = await self.api.search(songName=songName)
+        # 粗糙的解决办法，返回None语义不清晰
         if r is None:
-            raise WrongDataError
+            return None
         idRange = amount if amount < len(
             r["result"]["songs"]) else len(r["result"]["songs"])
         for i in range(idRange):

@@ -8,17 +8,13 @@ from nonebot import on_command
 
 dataget = dataGet()
 
-songpicker = on_command(
-    "点歌", permission=Permission(), priority=5)
+songpicker = on_command("点歌")
 
 
 @songpicker.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()
-    if args.isdigit():
-        if "songName" in state:
-            state["songNum"] = int(args)
-    elif args:
+    if args:
         state["songName"] = args
 
 
@@ -26,7 +22,7 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
 async def handle_songName(bot: Bot, event: Event, state: T_State):
     songName = state["songName"]
     songIdList = await dataget.songIds(songName=songName)
-    if not songIdList:
+    if songIdList is None:
         await songpicker.reject("没有找到这首歌，请发送其它歌名！")
     songInfoList = list()
     for songId in songIdList:
@@ -42,12 +38,6 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State):
     songIdList = state["songIdList"]
     songNum = state["songNum"]
 
-    # 处理重选
-    if not songNum.isdigit():
-        await songpicker.finish()
-    else:
-        songNum=int(songNum)
-    
     if songNum >= len(songIdList):
         await songpicker.reject("数字序号错误，请重选")
 
@@ -65,29 +55,12 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State):
     await songpicker.send(songContent)
 
     songCommentsDict = await dataget.songComments(songId=selectedSongId)
+    state["songCommentsDict"] = songCommentsDict
     songCommentsMessage = await dataProcess.mergeSongComments(songCommentsDict)
-    commentContent = [
-        {
-            "type": "text",
-            "data": {
-                "text": "下面为您播送热评：\n"
-            }
-        },
-        {
-            "type": "text",
-            "data": {
-                "text": songCommentsMessage
-            }
-        },
-        {
-            "type": "text",
-            "data": {
-                "text": "\n【回复序号可重选】"
-            }
-        }
-    ]
-
+    commentContent = "下面为您播送热评：\n" + songCommentsMessage + "\n【回复序号可重选】"
     await songpicker.send(commentContent)
 
-    # 重选功能
-    await songpicker.reject()
+
+@songpicker.got("songNum")
+async def handle_songName_more(bot: Bot, event: Event, state: T_State):
+    songNum = state["songNum"]
