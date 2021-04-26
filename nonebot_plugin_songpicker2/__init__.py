@@ -36,7 +36,7 @@ async def handle_songName(bot: Bot, event: Event, state: T_State):
 @songpicker.got("songNum")
 async def handle_songNum(bot: Bot, event: Event, state: T_State):
     songIdList = state["songIdList"]
-    songNum = state["songNum"]
+    songNum = int(state["songNum"])
 
     if songNum >= len(songIdList):
         await songpicker.reject("数字序号错误，请重选")
@@ -61,6 +61,3 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State):
     await songpicker.send(commentContent)
 
 
-@songpicker.got("songNum")
-async def handle_songName_more(bot: Bot, event: Event, state: T_State):
-    songNum = state["songNum"]
