@@ -57,7 +57,7 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State):
     songCommentsDict = await dataget.songComments(songId=selectedSongId)
     state["songCommentsDict"] = songCommentsDict
     songCommentsMessage = await dataProcess.mergeSongComments(songCommentsDict)
-    commentContent = "下面为您播送热评：\n" + songCommentsMessage + "\n【回复序号可重选】"
+    commentContent = "下面为您播送热评：\n" + songCommentsMessage
     await songpicker.send(commentContent)
 
 
