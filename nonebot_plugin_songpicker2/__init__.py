@@ -1,8 +1,9 @@
 # import nonebot
 from .data_source import dataGet, dataProcess
-from nonebot.permission import Permission
+from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot.adapters import Bot, Event
 from nonebot.typing import T_State
+from nonebot.params import State
 from nonebot import on_command
 
 
@@ -12,14 +13,14 @@ songpicker = on_command("点歌")
 
 
 @songpicker.handle()
-async def handle_first_receive(bot: Bot, event: Event, state: T_State):
+async def handle_first_receive(bot: Bot, event: Event, state: T_State = State()):
     args = str(event.get_message()).strip()
     if args:
         state["songName"] = args
 
 
 @songpicker.got("songName", prompt="歌名是？")
-async def handle_songName(bot: Bot, event: Event, state: T_State):
+async def handle_songName(bot: Bot, event: Event, state: T_State = State()):
     songName = state["songName"]
     songIdList = await dataget.songIds(songName=songName)
     if songIdList is None:
@@ -34,7 +35,7 @@ async def handle_songName(bot: Bot, event: Event, state: T_State):
 
 
 @songpicker.got("songNum")
-async def handle_songNum(bot: Bot, event: Event, state: T_State):
+async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
     songIdList = state["songIdList"]
     songNum = int(state["songNum"])
 
@@ -43,16 +44,7 @@ async def handle_songNum(bot: Bot, event: Event, state: T_State):
 
     selectedSongId = songIdList[int(songNum)]
 
-    songContent = [
-        {
-            "type": "music",
-            "data": {
-                "type": 163,
-                "id": selectedSongId
-            }
-        }
-    ]
-    await songpicker.send(songContent)
+    await songpicker.send(MessageSegment.music("163", selectedSongId))
 
     songCommentsDict = await dataget.songComments(songId=selectedSongId)
     state["songCommentsDict"] = songCommentsDict
