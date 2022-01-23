@@ -2,11 +2,11 @@
 name = "songpicker2"
 version = "0.1.1"
 description = ""
-authors = ["Maximilian Wu <me@maxesisn.online>"]
+authors = ["Maximilian Wu <me@maxng.cc>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-nonebot2 = "^2.0.0a9"
+nonebot2 = "^2.0.0-beta.1"
 build = "^0.1.0"
 twine = "^3.3.0"
 
