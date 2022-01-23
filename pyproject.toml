@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "songpicker2"
-version = "0.1.1"
+name = "nonebot_plugin_songpicker2"
+version = "0.1.3"
 description = ""
 authors = ["Maximilian Wu <me@maxng.cc>"]
 

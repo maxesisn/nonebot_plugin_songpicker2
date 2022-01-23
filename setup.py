@@ -5,9 +5,9 @@ from setuptools import setup
 
 setup(
     name='nonebot_plugin_songpicker2',
-    version='0.1.2',
+    version='0.1.3',
     author='maxesisn',
-    author_email='me@maxesisn.online',
+    author_email='me@maxng.cc',
     url='https://github.com/maxesisn/nonebot_plugin_songpicker2',
     description=u'适用于nonebot2的点歌插件',
     packages=['nonebot_plugin_songpicker2'],
