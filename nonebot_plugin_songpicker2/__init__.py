@@ -37,14 +37,14 @@ async def handle_songName(bot: Bot, event: Event, state: T_State = State()):
 @songpicker.got("songNum")
 async def handle_songNum(bot: Bot, event: Event, state: T_State = State()):
     songIdList = state["songIdList"]
-    songNum = int(state["songNum"])
+    songNum = int(str((state["songNum"])))
 
     if songNum >= len(songIdList):
         await songpicker.reject("数字序号错误，请重选")
 
     selectedSongId = songIdList[int(songNum)]
 
-    await songpicker.send(MessageSegment.music("163", selectedSongId))
+    await songpicker.send(MessageSegment.music("163", int(selectedSongId)))
 
     songCommentsDict = await dataget.songComments(songId=selectedSongId)
     state["songCommentsDict"] = songCommentsDict
