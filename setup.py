@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name='nonebot_plugin_songpicker2',
-    version='0.1.5',
+    version='0.1.6',
     author='maxesisn',
     author_email='me@maxng.cc',
     url='https://github.com/maxesisn/nonebot_plugin_songpicker2',
