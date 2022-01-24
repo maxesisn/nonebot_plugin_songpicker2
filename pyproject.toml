@@ -5,7 +5,7 @@ description = ""
 authors = ["Maximilian Wu <me@maxng.cc>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7.3"
 nonebot2 = "^2.0.0-beta.1"
 build = "^0.1.0"
 twine = "^3.3.0"
