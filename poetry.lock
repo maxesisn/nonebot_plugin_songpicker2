@@ -364,6 +364,17 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "nonebot-adapter-onebot"
+version = "2.0.0b1"
+description = "OneBot(CQHTTP) adapter for nonebot2"
+category = "main"
+optional = false
+python-versions = ">=3.7.3,<4.0.0"
+
+[package.dependencies]
+nonebot2 = ">=2.0.0-beta.1,<3.0.0"
+
+[[package]]
 name = "nonebot2"
 version = "2.0.0b1"
 description = "An asynchronous python bot framework."
@@ -828,7 +839,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8e957cc74fa64386586a358311d76b8d23b96a04b0bfbd71a626649d79a49b65"
+content-hash = "d6b8eacedc6c29465c121c02f3e8ef226aa107c915bddbb7b86b4896a697d305"
 
 [metadata.files]
 anyio = [
@@ -1134,6 +1145,10 @@ multidict = [
     {file = "multidict-6.0.1-cp39-cp39-win32.whl", hash = "sha256:d2cc15d2507b0d5f09726fd97bb9ffaa6bb47487fe77a208262cb6187fd9dcf3"},
     {file = "multidict-6.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:38ada537db7f9089560cf16dc5b8b280096213bc5260970929aca43675682739"},
     {file = "multidict-6.0.1.tar.gz", hash = "sha256:d40616f3f9326a18e1f2fa7c7e8e0e04a7e5228bfa2bd62c1e0d68fbc259b09b"},
+]
+nonebot-adapter-onebot = [
+    {file = "nonebot-adapter-onebot-2.0.0b1.tar.gz", hash = "sha256:9dad770371e577fead096ceacacc43b3ef304a8e238e8fff1163eefc4e947a75"},
+    {file = "nonebot_adapter_onebot-2.0.0b1-py3-none-any.whl", hash = "sha256:ca1375de1dd503a5ab20440445026195b587e05a2b18ae8df9b6ab17c9e857b5"},
 ]
 nonebot2 = [
     {file = "nonebot2-2.0.0b1-py3-none-any.whl", hash = "sha256:76ee4271a0ba9b1fbdcb34c50a23df391bed00d5d32d63b7fd018685de8130a4"},
