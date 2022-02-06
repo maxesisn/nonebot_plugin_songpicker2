@@ -14,7 +14,7 @@ songpicker = on_command("点歌")
 
 @songpicker.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State = State()):
-    args = str(event.get_message()).strip()
+    args = str(event.get_message()).strip().removeprefix("点歌")
     if args:
         state["songName"] = args
 
