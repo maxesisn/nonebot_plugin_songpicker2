@@ -14,7 +14,7 @@ class DataApi():
         '''
         async with httpx.AsyncClient() as client:
             r = await client.post(
-                f"http://music.163.com/api/search/get/",
+                f"http://music.163.com/api/search/get/web",
                 data={"s": song_name, "limit": 5, "type": 1, "offset": 0},
                 headers=self.headers,
                 cookies=self.cookies
