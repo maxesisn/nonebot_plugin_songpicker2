@@ -1,6 +1,6 @@
 # songpicker2
 适用于nonebot2的点歌插件，数据源为网易云音乐。  
-![pip install nonebot-plugin-songpicker2](https://badge.fury.io/py/nonebot_plugin_songpicker2.svg)
+[![](https://badge.fury.io/py/nonebot_plugin_songpicker2.svg)](https://pypi.org/project/nonebot-plugin-songpicker2/)
 
 > 能开源出来的新版本还在摸，暂时先当api参考项目用吧。
 
