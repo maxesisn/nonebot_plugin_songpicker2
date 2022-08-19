@@ -1,5 +1,6 @@
 # songpicker2
-适用于nonebot2的点歌插件，数据源为网易云音乐
+适用于nonebot2的点歌插件，数据源为网易云音乐。  
+![](https://badge.fury.io/py/nonebot_plugin_songpicker2.svg)
 
 > 能开源出来的新版本还在摸，暂时先当api参考项目用吧。
 
@@ -16,7 +17,7 @@ poetry add nonebot_plugin_songpicker2
 
 * 使用git clone（不推荐）
 ```shell
-git clone https://github.com/maxesisn/TachibanaBot2
+git clone https://github.com/maxesisn/nonebot_plugin_songpicker2
   
 之后手动复制文件或创建软链接
 ```
