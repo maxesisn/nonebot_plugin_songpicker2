@@ -6,7 +6,7 @@ authors = ["Maximilian Wu <me@maxng.cc>"]
 repository = "https://github.com/maxesisn/nonebot_plugin_songpicker2"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 nonebot2 = "^2.0.0-beta.1"
 build = "^0.1.0"
 twine = "^3.3.0"

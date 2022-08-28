@@ -65,7 +65,7 @@ class DataGet(DataApi):
 
     api = DataApi()
 
-    async def song_ids(self, song_name: str, amount=5) -> list:
+    async def song_ids(self, song_name: str, amount=5):
         '''
         根据用户输入的songName 获取候选songId列表 [默认songId数量：5]
         '''
@@ -77,7 +77,7 @@ class DataGet(DataApi):
             song_ids.append(r["result"]["songs"][i]["id"])
         return song_ids
 
-    async def song_comments(self, song_id: int, amount=3) -> dict:
+    async def song_comments(self, song_id: int, amount=3):
         '''
         根据传递的单一song_id，获取song_comments dict [默认评论数量上限：3]
         '''
@@ -90,7 +90,7 @@ class DataGet(DataApi):
                           ['nickname']] = r['hotComments'][i]['content']
         return song_comments
 
-    async def song_info(self, song_id: int) -> dict:
+    async def song_info(self, song_id: int):
         '''
         根据传递的songId，获取歌曲名、歌手、专辑等信息，作为dict返回
         '''
@@ -114,7 +114,7 @@ class DataProcess():
     '''
 
     @staticmethod
-    async def mergeSongInfo(song_infos: list) -> str:
+    async def mergeSongInfo(song_infos) -> str:
         '''
         将歌曲信息list处理为字符串，供用户点歌
         传递进的歌曲信息list含有多个歌曲信息dict
@@ -133,7 +133,7 @@ class DataProcess():
         return song_info_message
 
     @staticmethod
-    async def mergeSongComments(song_comments: dict) -> str:
+    async def mergeSongComments(song_comments) -> str:
         song_comments_message = '\n'.join(
             ['%s： %s' % (key, value) for (key, value) in song_comments.items()])
         return song_comments_message
