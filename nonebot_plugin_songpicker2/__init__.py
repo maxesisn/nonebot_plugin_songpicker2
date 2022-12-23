@@ -11,7 +11,7 @@ dataGet = DataGet()
 
 
 @songpicker.handle()
-async def _(args: Message = CommandArg(), state: T_State):
+async def _(state: T_State, args: Message = CommandArg()):
     args = str(args).split(" ")
     if len(args) > 0:
         state["song_name"] = args[0]
