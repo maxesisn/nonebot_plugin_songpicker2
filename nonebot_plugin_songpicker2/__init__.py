@@ -1,6 +1,6 @@
 from nonebot.adapters.onebot.v11 import Message, MessageSegment
 from nonebot.typing import T_State
-from nonebot.params import State, CommandArg
+from nonebot.params import CommandArg
 from nonebot import on_command
 
 from .data_source import DataGet, DataProcess
@@ -11,7 +11,7 @@ dataGet = DataGet()
 
 
 @songpicker.handle()
-async def _(args: Message = CommandArg(), state: T_State = State()):
+async def _(args: Message = CommandArg(), state: T_State):
     args = str(args).split(" ")
     if len(args) > 0:
         state["song_name"] = args[0]
@@ -21,7 +21,7 @@ async def _(args: Message = CommandArg(), state: T_State = State()):
 
 
 @songpicker.got("song_name", prompt="歌名是？")
-async def _(state: T_State = State()):
+async def _(state: T_State):
     song_name = state["song_name"]
     song_ids = await dataGet.song_ids(song_name=song_name)
     if not song_ids:
@@ -38,7 +38,7 @@ async def _(state: T_State = State()):
 
 
 @songpicker.got("choice")
-async def _(state: T_State = State()):
+async def _(state: T_State):
     song_ids = state["song_ids"]
     choice = state["choice"]
     try:
