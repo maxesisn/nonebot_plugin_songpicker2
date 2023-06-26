@@ -1,9 +1,17 @@
 from nonebot.adapters.onebot.v11 import Message, MessageSegment
 from nonebot.typing import T_State
 from nonebot.params import CommandArg
+from nonebot.plugin import PluginMetadata
 from nonebot import on_command
 
 from .data_source import DataGet, DataProcess
+
+__plugin_meta__ = PluginMetadata(
+    name="songpicker2",
+    description="点播歌曲，支持候选菜单、热评显示，数据源为网易云",
+    usage="点歌吧大概",
+    extra={},
+)
 
 songpicker = on_command("点歌")
 
