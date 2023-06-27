@@ -11,6 +11,8 @@ __plugin_meta__ = PluginMetadata(
     description="点播歌曲，支持候选菜单、热评显示，数据源为网易云",
     usage="点歌吧大概",
     type="application",
+    homepage="https://github.com/maxesisn/nonebot_plugin_songpicker2",
+    supported_adapters={"~onebot.v11"},
     extra={},
 )
 
