@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot_plugin_songpicker2"
-version = "0.2.5"
+version = "0.2.6"
 description = "点播歌曲，支持候选菜单、热评显示，数据源为网易云"
 authors = ["Maximilian Wu <me@maxng.cc>"]
 repository = "https://github.com/maxesisn/nonebot_plugin_songpicker2"
